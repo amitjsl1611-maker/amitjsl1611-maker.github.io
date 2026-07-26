@@ -123,7 +123,7 @@
       font-size: clamp(44px, 6.5vw, 92px);
       font-weight: 700;
       line-height: 1.12;
-      color: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.12);
       text-decoration: none;
       display: block;
       letter-spacing: -0.03em;
@@ -131,18 +131,6 @@
     }
 
     .menu-links a:hover { color: #fff; }
-
-    .menu-links .num {
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: var(--orange);
-      margin-right: 20px;
-      vertical-align: middle;
-      display: inline-block;
-      transform: translateY(-4px);
-    }
 
     .menu-footer {
       position: absolute;
@@ -181,32 +169,51 @@
       min-height: 100svh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+      align-items: flex-start;
+      justify-content: flex-end;
       position: relative;
-      padding: calc(var(--nav-h) + 48px) 24px 0;
+      padding: calc(var(--nav-h) + 24px) 56px 0;
       overflow: hidden;
     }
 
     .hero-inner {
       position: relative;
       z-index: 10;
-      max-width: 1100px;
+      max-width: 920px;
       width: 100%;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      padding-bottom: 96px;
+    }
+
+    /* Page-load hero entry */
+    @keyframes heroUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-headline {
+      animation: heroUp 0.85s cubic-bezier(0.23, 1, 0.32, 1) 0.1s both;
+    }
+
+    .hero-sub {
+      animation: heroUp 0.85s cubic-bezier(0.23, 1, 0.32, 1) 0.22s both;
+    }
+
+    .hero-ctas {
+      animation: heroUp 0.85s cubic-bezier(0.23, 1, 0.32, 1) 0.32s both;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-headline,
+      .hero-sub,
+      .hero-ctas { animation: none; }
     }
 
     h1 {
       font-family: var(--font-display);
-      font-size: clamp(44px, 7vw, 104px);
+      font-size: clamp(48px, 7.5vw, 112px);
       font-weight: 800;
-      line-height: 1.06;
-      letter-spacing: -0.02em;
+      line-height: 1.04;
+      letter-spacing: -0.03em;
       color: var(--text);
       margin-bottom: 28px;
       text-align: left;
@@ -214,15 +221,14 @@
 
     h1 .line { display: block; }
 
-
-    /* Animated word carousel — slide up */
+    /* Animated word carousel */
     .word-carousel {
       display: inline-block;
       position: relative;
       vertical-align: top;
       overflow: hidden;
       min-width: 5em;
-      height: 1.06em;
+      height: 1.04em;
     }
 
     .word-track span {
@@ -237,15 +243,8 @@
                   opacity 0.35s ease-out;
     }
 
-    .word-track span.active {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .word-track span.leaving {
-      transform: translateY(-80%);
-      opacity: 0;
-    }
+    .word-track span.active  { transform: translateY(0);    opacity: 1; }
+    .word-track span.leaving { transform: translateY(-80%); opacity: 0; }
 
     @media (prefers-reduced-motion: reduce) {
       .word-track span { transition: none; }
@@ -255,20 +254,18 @@
       font-family: var(--font-body);
       font-size: clamp(15px, 1.5vw, 18px);
       font-weight: 400;
-      line-height: 1.7;
+      line-height: 1.75;
       color: var(--text-muted);
-      max-width: 860px;
+      max-width: 560px;
       margin: 0 0 44px;
-      text-align: center;
+      text-align: left;
     }
 
     .hero-ctas {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 28px;
+      gap: 16px;
       flex-wrap: wrap;
-      justify-content: flex-start;
     }
 
     .btn-primary {
@@ -284,18 +281,12 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
       transition: background 0.2s ease-out, transform 0.15s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    .btn-primary:hover {
-      background: #2a2a2a;
-      transform: translateY(-1px);
-    }
-
-    .btn-primary:active {
-      transform: scale(0.97);
-      transition: transform 0.1s ease-out;
-    }
+    .btn-primary:hover  { background: #2a2a2a; transform: translateY(-1px); }
+    .btn-primary:active { transform: scale(0.97); transition: transform 0.1s ease-out; }
 
     .btn-secondary {
       font-family: var(--font-body);
@@ -304,25 +295,19 @@
       letter-spacing: 0.01em;
       color: var(--text);
       background: transparent;
-      border: 1.5px solid rgba(13,13,13,0.18);
+      border: 1.5px solid rgba(13,13,13,0.2);
       padding: 13px 28px;
       border-radius: 8px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
       transition: border-color 0.2s ease-out, transform 0.15s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    .btn-secondary:hover {
-      border-color: rgba(13,13,13,0.45);
-      color: var(--text);
-    }
-
-    .btn-secondary:active {
-      transform: scale(0.97);
-      transition: transform 0.1s ease-out;
-    }
+    .btn-secondary:hover  { border-color: rgba(13,13,13,0.5); }
+    .btn-secondary:active { transform: scale(0.97); transition: transform 0.1s ease-out; }
 
     .material-symbols-outlined {
       font-size: 18px;
@@ -356,7 +341,6 @@
     .marquee-group {
       display: flex;
       align-items: center;
-      gap: 0;
       flex-shrink: 0;
     }
 
@@ -374,7 +358,7 @@
       object-fit: contain;
       display: block;
       transition: opacity 0.25s;
-      opacity: 0.85;
+      opacity: 0.8;
     }
 
     .marquee-item:hover img { opacity: 1; }
@@ -384,7 +368,7 @@
       font-size: 14px;
       line-height: 1;
       flex-shrink: 0;
-      opacity: 0.3;
+      opacity: 0.22;
     }
 
     @keyframes marquee {
@@ -429,13 +413,14 @@
       max-width: 460px;
     }
 
-    /* Bento grid */
+    /* ─── BENTO GRID ──────────────────────────────── */
     .bento {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       gap: var(--gap);
     }
 
+    /* Card scroll reveal — hidden before JS fires */
     .card {
       background: var(--white);
       border-radius: 14px;
@@ -444,73 +429,62 @@
       color: inherit;
       display: flex;
       flex-direction: column;
-      transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
-                  box-shadow 0.35s ease;
+      opacity: 0;
+      transform: translateY(28px);
     }
 
-    .card:hover {
+    /* Once revealed: transition enabled, visible, hover works */
+    .card.revealed {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.65s ease-out,
+                  transform 0.65s cubic-bezier(0.23, 1, 0.32, 1),
+                  box-shadow 0.4s ease;
+    }
+
+    .card.revealed:hover {
       transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 20px 56px rgba(0,0,0,0.08);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.1);
     }
 
-    .c-xl  { grid-column: span 7; min-height: 440px; }
-    .c-lg  { grid-column: span 5; min-height: 440px; }
-    .c-md  { grid-column: span 4; min-height: 320px; }
-    .c-fw  { grid-column: span 12; flex-direction: row; min-height: 260px; }
+    .card.revealed:active {
+      transform: scale(0.98);
+      transition: transform 0.1s ease-out;
+    }
 
+    @media (prefers-reduced-motion: reduce) {
+      .card { opacity: 1; transform: none; }
+      .card.revealed { transition: box-shadow 0.3s ease; }
+    }
+
+    .c-xl   { grid-column: span 7;  min-height: 440px; }
+    .c-lg   { grid-column: span 5;  min-height: 440px; }
+    .c-md   { grid-column: span 4;  min-height: 320px; }
+    .c-half { grid-column: span 6;  min-height: 320px; }
+    .c-fw   { grid-column: span 12; flex-direction: row; min-height: 260px; }
+
+    /* Card image — real photos */
     .card-img {
       flex: 1;
       min-height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-display);
-      font-size: 52px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      color: rgba(220, 80, 30, 0.18);
       position: relative;
       overflow: hidden;
-      background: linear-gradient(145deg, #FFF6F0 0%, #FFEADE 60%, #FFD9C0 100%);
+      background: #E8E4DE;
     }
 
-    .c-fw .card-img { flex: 0 0 38%; min-height: auto; font-size: 64px; }
-
-    /* Organic blob shapes inside each card image */
-    .card-img::before,
-    .card-img::after {
-      content: '';
+    .card-img img {
       position: absolute;
-      border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%;
-      opacity: 0.35;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.65s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    .card-img::before {
-      width: 65%;
-      height: 65%;
-      top: -15%;
-      right: -10%;
-      background: radial-gradient(circle, #FFCBA4 0%, #FFB07A 100%);
-    }
+    .card.revealed:hover .card-img img { transform: scale(1.04); }
 
-    .card-img::after {
-      width: 50%;
-      height: 55%;
-      bottom: -12%;
-      left: -8%;
-      background: radial-gradient(circle, #FFD4AD 0%, #FFAA6E 100%);
-      border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%;
-    }
-
-    /* Subtle variation per card so they don't all look identical */
-    .bg-1::before { border-radius: 55% 45% 60% 40% / 50% 60% 40% 50%; top: -20%; right: -15%; }
-    .bg-2::before { border-radius: 40% 60% 45% 55% / 60% 40% 55% 45%; top: -10%; right: -5%; width: 55%; }
-    .bg-3::after  { border-radius: 50% 50% 35% 65% / 45% 55% 50% 50%; bottom: -18%; left: -12%; }
-    .bg-4::before { border-radius: 65% 35% 50% 50% / 40% 60% 45% 55%; top: -25%; right: -20%; width: 70%; }
-    .bg-5::after  { border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%; bottom: -5%; left: -5%; width: 45%; }
-    .bg-6::before { border-radius: 50% 50% 60% 40% / 55% 45% 55% 45%; top: -8%; right: -8%; width: 60%; }
-    .bg-7::after  { border-radius: 60% 40% 40% 60% / 50% 50% 55% 45%; bottom: -20%; left: -15%; width: 55%; }
-    .bg-8::before { border-radius: 45% 55% 55% 45% / 60% 40% 55% 45%; top: -15%; right: -10%; width: 75%; height: 70%; }
+    .c-fw .card-img { flex: 0 0 40%; min-height: auto; }
 
     .card-body {
       padding: 24px 28px 28px;
@@ -530,7 +504,7 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--text-muted);
-      background: #F2F2F2;
+      background: #EBEBEB;
       padding: 4px 10px;
       border-radius: 100px;
     }
@@ -565,17 +539,19 @@
       text-transform: uppercase;
       color: var(--orange);
       margin-top: 4px;
-      transition: gap 0.25s;
+      transition: gap 0.25s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    .card:hover .card-cta { gap: 10px; }
+    .card.revealed:hover .card-cta { gap: 12px; }
 
     /* ─── RESPONSIVE ──────────────────────────────── */
     @media (max-width: 1024px) {
       :root { --section-v: 96px; }
-      nav, .works { padding-left: 36px; padding-right: 36px; }
+      nav   { padding: 0 36px; }
+      .hero { padding-left: 36px; padding-right: 36px; }
+      .works { padding-left: 36px; padding-right: 36px; }
       .c-xl, .c-lg { grid-column: span 12; }
-      .c-md { grid-column: span 6; }
+      .c-md, .c-half { grid-column: span 6; }
       .c-fw { flex-direction: column; }
       .c-fw .card-img { flex: none; min-height: 220px; }
       .menu-overlay { padding: 80px 48px 60px; }
@@ -584,21 +560,24 @@
 
     @media (max-width: 768px) {
       :root { --section-v: 80px; --gap: 12px; }
-      nav { padding: 0 24px; }
+      nav   { padding: 0 24px; }
+      .hero { padding: calc(var(--nav-h) + 20px) 24px 0; }
       .works { padding-left: 24px; padding-right: 24px; }
-      .c-xl, .c-lg, .c-md, .c-fw { grid-column: span 12; }
-      .c-xl, .c-lg { min-height: 380px; }
-      .c-md { min-height: 300px; }
+      .c-xl, .c-lg, .c-md, .c-half, .c-fw { grid-column: span 12; }
+      .c-xl, .c-lg { min-height: 360px; }
+      .c-md, .c-half { min-height: 280px; }
       .c-fw { flex-direction: column; min-height: auto; }
-      .c-fw .card-img { min-height: 200px; font-size: 48px; }
+      .c-fw .card-img { flex: none; min-height: 220px; }
       .c-fw .card-body { padding: 28px 24px 32px; }
+      .hero-inner { padding-bottom: 80px; }
       .menu-overlay { padding: 100px 28px 80px; }
       .menu-footer { left: 28px; right: 28px; flex-direction: column; gap: 20px; align-items: flex-start; }
       .menu-links a { font-size: clamp(36px, 11vw, 52px); }
     }
 
     @media (max-width: 480px) {
-      nav { padding: 0 20px; }
+      nav   { padding: 0 20px; }
+      .hero { padding-left: 20px; padding-right: 20px; }
       .works { padding-left: 20px; padding-right: 20px; }
     }
   </style>
@@ -617,10 +596,10 @@
   <!-- MENU OVERLAY -->
   <div class="menu-overlay" id="menuOverlay" role="dialog" aria-modal="true" aria-label="Site navigation">
     <ul class="menu-links">
-      <li><a href="#works"><span class="num">01</span>Work</a></li>
-      <li><a href="#about"><span class="num">02</span>About</a></li>
-      <li><a href="#process"><span class="num">03</span>Approach</a></li>
-      <li><a href="#contact"><span class="num">04</span>Contact</a></li>
+      <li><a href="#works">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#process">Approach</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="menu-footer">
       <div>
@@ -629,7 +608,7 @@
       </div>
       <div>
         <p class="menu-contact-label">Connect</p>
-        <a href="#" class="menu-contact-link">LinkedIn →</a>
+        <a href="#" class="menu-contact-link">LinkedIn &rarr;</a>
       </div>
     </div>
   </div>
@@ -639,11 +618,11 @@
     <!-- HERO -->
     <section class="hero" aria-label="Introduction">
       <div class="hero-inner">
-        <h1>
+        <h1 class="hero-headline">
           <span class="line">Turning <span class="word-carousel" id="wordCarousel" aria-live="polite"><span class="word-track" id="wordTrack"><span>complexity</span><span>ambiguity</span><span>friction</span><span>uncertainty</span></span></span></span>
           <span class="line">into business clarity.</span>
         </h1>
-        <p class="hero-sub">I help organisations transform complex ideas into products that people trust and businesses value—through product strategy, systems thinking, and thoughtful design.</p>
+        <p class="hero-sub">I help organisations transform complex ideas into products that people trust and businesses value. Through product strategy, systems thinking, and thoughtful design.</p>
         <div class="hero-ctas">
           <a href="#works" class="btn-primary">
             View Selected Work
@@ -659,43 +638,41 @@
       <!-- MARQUEE -->
       <div class="marquee-wrap" aria-hidden="true">
         <div class="marquee-track">
-          <!-- Group 1 -->
           <div class="marquee-group">
             <span class="marquee-item"><img src="Logos/VW.png" alt="Volkswagen"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
             <span class="marquee-item"><img src="Logos/HD.png" alt="Harley-Davidson"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
             <span class="marquee-item"><img src="Logos/TU.png" alt="TransUnion CIBIL"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
             <span class="marquee-item"><img src="Logos/tata.png" alt="TATA Trusts"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
             <span class="marquee-item"><img src="Logos/kubix.png" alt="Kubix"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
             <span class="marquee-item"><img src="Logos/planera.png" alt="Planera"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
             <span class="marquee-item"><img src="Logos/NB.png" alt="NetBrahma"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
             <span class="marquee-item"><img src="Logos/schumacher homes.png" alt="Schumacher Homes"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
           </div>
-          <!-- Group 2 — duplicate for seamless loop -->
           <div class="marquee-group">
             <span class="marquee-item"><img src="Logos/VW.png" alt="Volkswagen"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
             <span class="marquee-item"><img src="Logos/HD.png" alt="Harley-Davidson"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
             <span class="marquee-item"><img src="Logos/TU.png" alt="TransUnion CIBIL"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
             <span class="marquee-item"><img src="Logos/tata.png" alt="TATA Trusts"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
             <span class="marquee-item"><img src="Logos/kubix.png" alt="Kubix"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
             <span class="marquee-item"><img src="Logos/planera.png" alt="Planera"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
             <span class="marquee-item"><img src="Logos/NB.png" alt="NetBrahma"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
             <span class="marquee-item"><img src="Logos/schumacher homes.png" alt="Schumacher Homes"></span>
-            <span class="marquee-sep">·</span>
+            <span class="marquee-sep">&middot;</span>
           </div>
         </div>
       </div>
@@ -706,13 +683,15 @@
       <div class="section-header">
         <p class="section-eyebrow">Selected Work</p>
         <h2 class="section-title">Strategy and craft,<br>applied at scale.</h2>
-        <p class="section-desc">A curated set of engagements across enterprise, consumer, and emerging tech — where design leadership shaped product direction and measurable outcomes.</p>
+        <p class="section-desc">A curated set of engagements across enterprise, consumer, and emerging tech where design leadership shaped product direction and measurable outcomes.</p>
       </div>
 
       <div class="bento" role="list">
 
         <a href="./TransUnion CIBIL/" class="card c-xl" role="listitem">
-          <div class="card-img bg-1">TC</div>
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/cibil-fintech/900/600" alt="" loading="lazy">
+          </div>
           <div class="card-body">
             <div class="card-tags">
               <span class="tag">Fintech</span>
@@ -720,13 +699,15 @@
               <span class="tag">Product Strategy</span>
             </div>
             <h3 class="card-title">TransUnion CIBIL</h3>
-            <p class="card-desc">Redesigning credit intelligence for 1.3 billion Indians — turning data complexity into financial clarity.</p>
-            <span class="card-cta">View Case Study →</span>
+            <p class="card-desc">Redesigning credit intelligence for 1.3 billion Indians, turning data complexity into financial clarity.</p>
+            <span class="card-cta">View Case Study &rarr;</span>
           </div>
         </a>
 
         <a href="./Volkswagen/" class="card c-lg" role="listitem">
-          <div class="card-img bg-2">VW</div>
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/vw-automotive/700/600" alt="" loading="lazy">
+          </div>
           <div class="card-body">
             <div class="card-tags">
               <span class="tag">Automotive</span>
@@ -734,12 +715,14 @@
             </div>
             <h3 class="card-title">Volkswagen</h3>
             <p class="card-desc">A scalable design system for one of the world's most recognised automotive brands.</p>
-            <span class="card-cta">View Case Study →</span>
+            <span class="card-cta">View Case Study &rarr;</span>
           </div>
         </a>
 
         <a href="./Harley Davidson/" class="card c-md" role="listitem">
-          <div class="card-img bg-3">HD</div>
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/harley-davidson/600/500" alt="" loading="lazy">
+          </div>
           <div class="card-body">
             <div class="card-tags">
               <span class="tag">Consumer</span>
@@ -747,12 +730,14 @@
             </div>
             <h3 class="card-title">Harley-Davidson</h3>
             <p class="card-desc">Bridging an iconic brand's legacy with a modern digital experience.</p>
-            <span class="card-cta">View →</span>
+            <span class="card-cta">View &rarr;</span>
           </div>
         </a>
 
         <a href="./TATA Trusts/" class="card c-md" role="listitem">
-          <div class="card-img bg-4">TT</div>
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/tata-social/600/500" alt="" loading="lazy">
+          </div>
           <div class="card-body">
             <div class="card-tags">
               <span class="tag">Social Impact</span>
@@ -760,25 +745,29 @@
             </div>
             <h3 class="card-title">TATA Trusts</h3>
             <p class="card-desc">Design leadership in service of social impact at national scale.</p>
-            <span class="card-cta">View →</span>
+            <span class="card-cta">View &rarr;</span>
           </div>
         </a>
 
         <a href="./Vaidya AI/" class="card c-md" role="listitem">
-          <div class="card-img bg-5">AI</div>
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/vaidya-health/600/500" alt="" loading="lazy">
+          </div>
           <div class="card-body">
             <div class="card-tags">
               <span class="tag">Healthcare AI</span>
-              <span class="tag">0 → 1</span>
+              <span class="tag">0 to 1</span>
             </div>
             <h3 class="card-title">Vaidya AI</h3>
             <p class="card-desc">Designing clinical AI at the frontier of healthcare in India.</p>
-            <span class="card-cta">View →</span>
+            <span class="card-cta">View &rarr;</span>
           </div>
         </a>
 
-        <a href="./Kubix/" class="card c-md" role="listitem">
-          <div class="card-img bg-6">Kx</div>
+        <a href="./Kubix/" class="card c-half" role="listitem">
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/kubix-startup/700/500" alt="" loading="lazy">
+          </div>
           <div class="card-body">
             <div class="card-tags">
               <span class="tag">Startup</span>
@@ -786,25 +775,29 @@
             </div>
             <h3 class="card-title">Kubix</h3>
             <p class="card-desc">Early-stage product strategy and design from the ground up.</p>
-            <span class="card-cta">View →</span>
+            <span class="card-cta">View &rarr;</span>
           </div>
         </a>
 
-        <a href="./Planera/" class="card c-md" role="listitem">
-          <div class="card-img bg-7">Pl</div>
+        <a href="./Planera/" class="card c-half" role="listitem">
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/planera-saas/700/500" alt="" loading="lazy">
+          </div>
           <div class="card-body">
             <div class="card-tags">
               <span class="tag">SaaS</span>
-              <span class="tag">0 → 1</span>
+              <span class="tag">0 to 1</span>
             </div>
             <h3 class="card-title">Planera</h3>
             <p class="card-desc">Building a planning product from first principles to launch.</p>
-            <span class="card-cta">View →</span>
+            <span class="card-cta">View &rarr;</span>
           </div>
         </a>
 
         <a href="./NetBrahma Recruitment CoPilot/" class="card c-fw" role="listitem">
-          <div class="card-img bg-8">NB</div>
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/netbrahma-ai/1000/600" alt="" loading="lazy">
+          </div>
           <div class="card-body">
             <div class="card-tags">
               <span class="tag">AI Product</span>
@@ -812,8 +805,8 @@
               <span class="tag">End-to-end</span>
             </div>
             <h3 class="card-title">NetBrahma Recruitment CoPilot</h3>
-            <p class="card-desc">A fully AI-built recruitment intelligence tool — designed, engineered, and shipped using Claude. From strategy and system design to production deployment.</p>
-            <span class="card-cta">View Case Study →</span>
+            <p class="card-desc">A fully AI-built recruitment intelligence tool, designed, engineered, and shipped using Claude. From strategy and system design to production deployment.</p>
+            <span class="card-cta">View Case Study &rarr;</span>
           </div>
         </a>
 
@@ -823,8 +816,8 @@
   </main>
 
   <script>
-    // ── Menu ──────────────────────────────────────────
-    const btn = document.getElementById('menuBtn');
+    // ── Menu ──────────────────────────────────────────────────────────
+    const btn     = document.getElementById('menuBtn');
     const overlay = document.getElementById('menuOverlay');
     let isOpen = false;
 
@@ -840,15 +833,14 @@
     overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) toggleMenu(false); });
 
-    // ── Word carousel (crossfade) ──────────────────────
-    const carousel = document.getElementById('wordCarousel');
-    const track    = document.getElementById('wordTrack');
-    const items    = Array.from(track.children);
+    // ── Word carousel ─────────────────────────────────────────────────
+    const track = document.getElementById('wordTrack');
+    const items = Array.from(track.children);
     let current = 0;
 
     function initCarousel() {
       items[0].classList.add('active');
-      setInterval(advance, 2000);
+      setInterval(advance, 2200);
     }
 
     function advance() {
@@ -863,13 +855,36 @@
       setTimeout(() => {
         prev.style.transition = 'none';
         prev.classList.remove('leaving');
-        prev.offsetHeight; // force reflow
+        prev.offsetHeight;
         prev.style.transition = '';
       }, 620);
     }
 
     initCarousel();
 
+    // ── Card scroll reveal ────────────────────────────────────────────
+    const cards = document.querySelectorAll('.card');
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            // Stagger based on card's index within its row
+            const card = entry.target;
+            const siblings = Array.from(card.parentElement.children);
+            const index = siblings.indexOf(card);
+            const delay = (index % 4) * 80;
+            setTimeout(() => card.classList.add('revealed'), delay);
+            observer.unobserve(card);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      cards.forEach(card => observer.observe(card));
+    } else {
+      // Fallback for old browsers
+      cards.forEach(card => card.classList.add('revealed'));
+    }
   </script>
 
 </body>
