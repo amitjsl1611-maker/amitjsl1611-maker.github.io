@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Product Design Leader combining business strategy, systems thinking, and human-centred design to help companies build better products.">
+  <title>AJ — Product Design Leader</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:          #F2F2F2;
+      --text:        #0D0D0D;
+      --text-muted:  #6A6A6A;
+      --orange:      #FF5533;
+      --orange-dark: #E03D1E;
+      --white:       #FFFFFF;
+      --border:      rgba(13,13,13,0.1);
+
+      --font-display: 'Rethink Sans', sans-serif;
+      --font-body:    'Manrope', sans-serif;
+
+      --nav-h:     72px;
+      --max-w:     1200px;
+      --gap:       16px;
+      --section-v: 128px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 56px;
+      z-index: 200;
+    }
+
+    .menu-btn {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 10px;
+      z-index: 300;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 26px;
+      height: 1.5px;
+      background: var(--text);
+      transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+                  opacity 0.3s ease,
+                  background 0.3s ease;
+      transform-origin: center;
+    }
+
+    .menu-btn.open span { background: #fff; }
+    .menu-btn.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .menu-btn.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    /* ─── MENU OVERLAY ────────────────────────────── */
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: #0D0D0D;
+      z-index: 250;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 80px 60px;
+      opacity: 0;
+      pointer-events: none;
+      clip-path: inset(0 0 100% 0);
+      transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                  clip-path 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .menu-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+      clip-path: inset(0 0 0% 0);
+    }
+
+    .menu-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .menu-links a {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 6.5vw, 92px);
+      font-weight: 700;
+      line-height: 1.12;
+      color: rgba(255,255,255,0.1);
+      text-decoration: none;
+      display: block;
+      letter-spacing: -0.03em;
+      transition: color 0.3s ease;
+    }
+
+    .menu-links a:hover { color: #fff; }
+
+    .menu-links .num {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--orange);
+      margin-right: 20px;
+      vertical-align: middle;
+      display: inline-block;
+      transform: translateY(-4px);
+    }
+
+    .menu-footer {
+      position: absolute;
+      bottom: 56px;
+      left: 80px;
+      right: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 32px;
+    }
+
+    .menu-contact-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 10px;
+    }
+
+    .menu-contact-link {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    .menu-contact-link:hover { color: var(--orange); }
+
+    /* ─── HERO ────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: calc(var(--nav-h) + 48px) 24px 0;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 10;
+      max-width: 1100px;
+      width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 7vw, 104px);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    h1 .line { display: block; }
+
+
+    /* Animated word carousel — slide up */
+    .word-carousel {
+      display: inline-block;
+      position: relative;
+      vertical-align: top;
+      overflow: hidden;
+      min-width: 5em;
+      height: 1.06em;
+    }
+
+    .word-track span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      white-space: nowrap;
+      color: var(--orange);
+      transform: translateY(110%);
+      transition: transform 0.55s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+
+    .word-track span.active {
+      transform: translateY(0);
+    }
+
+    .word-track span.leaving {
+      transform: translateY(-110%);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .word-track span { transition: none; }
+    }
+
+    .hero-sub {
+      font-family: var(--font-body);
+      font-size: clamp(15px, 1.5vw, 18px);
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 860px;
+      margin: 0 0 44px;
+      text-align: center;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    .btn-primary {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: #fff;
+      background: #0D0D0D;
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: #2a2a2a;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      background: transparent;
+      border: 1.5px solid rgba(13,13,13,0.18);
+      padding: 13px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(13,13,13,0.45);
+      color: var(--text);
+    }
+
+    .material-symbols-outlined {
+      font-size: 18px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    /* ─── MARQUEE ─────────────────────────────────── */
+    .marquee-wrap {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      padding: 20px 0;
+      background: transparent;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+
+    .marquee-track:hover { animation-play-state: paused; }
+
+    .marquee-group {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
+    }
+
+    .marquee-item {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+      padding: 0 32px;
+      transition: color 0.2s;
+    }
+
+    .marquee-item:hover { color: var(--text); }
+
+    .marquee-sep {
+      color: var(--orange);
+      font-size: 18px;
+      line-height: 1;
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── SELECTED WORKS ──────────────────────────── */
+    .works {
+      padding: var(--section-v) 56px;
+      max-width: calc(var(--max-w) + 112px);
+      margin: 0 auto;
+    }
+
+    .section-header { margin-bottom: 56px; }
+
+    .section-eyebrow {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 3.8vw, 52px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 460px;
+    }
+
+    /* Bento grid */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--gap);
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 14px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+                  box-shadow 0.35s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.09);
+    }
+
+    .c-xl  { grid-column: span 7; min-height: 440px; }
+    .c-lg  { grid-column: span 5; min-height: 440px; }
+    .c-md  { grid-column: span 4; min-height: 320px; }
+    .c-fw  { grid-column: span 12; flex-direction: row; min-height: 260px; }
+
+    .card-img {
+      flex: 1;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: rgba(220, 80, 30, 0.18);
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(145deg, #FFF6F0 0%, #FFEADE 60%, #FFD9C0 100%);
+    }
+
+    .c-fw .card-img { flex: 0 0 38%; min-height: auto; font-size: 64px; }
+
+    /* Organic blob shapes inside each card image */
+    .card-img::before,
+    .card-img::after {
+      content: '';
+      position: absolute;
+      border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%;
+      opacity: 0.35;
+    }
+
+    .card-img::before {
+      width: 65%;
+      height: 65%;
+      top: -15%;
+      right: -10%;
+      background: radial-gradient(circle, #FFCBA4 0%, #FFB07A 100%);
+    }
+
+    .card-img::after {
+      width: 50%;
+      height: 55%;
+      bottom: -12%;
+      left: -8%;
+      background: radial-gradient(circle, #FFD4AD 0%, #FFAA6E 100%);
+      border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%;
+    }
+
+    /* Subtle variation per card so they don't all look identical */
+    .bg-1::before { border-radius: 55% 45% 60% 40% / 50% 60% 40% 50%; top: -20%; right: -15%; }
+    .bg-2::before { border-radius: 40% 60% 45% 55% / 60% 40% 55% 45%; top: -10%; right: -5%; width: 55%; }
+    .bg-3::after  { border-radius: 50% 50% 35% 65% / 45% 55% 50% 50%; bottom: -18%; left: -12%; }
+    .bg-4::before { border-radius: 65% 35% 50% 50% / 40% 60% 45% 55%; top: -25%; right: -20%; width: 70%; }
+    .bg-5::after  { border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%; bottom: -5%; left: -5%; width: 45%; }
+    .bg-6::before { border-radius: 50% 50% 60% 40% / 55% 45% 55% 45%; top: -8%; right: -8%; width: 60%; }
+    .bg-7::after  { border-radius: 60% 40% 40% 60% / 50% 50% 55% 45%; bottom: -20%; left: -15%; width: 55%; }
+    .bg-8::before { border-radius: 45% 55% 55% 45% / 60% 40% 55% 45%; top: -15%; right: -10%; width: 75%; height: 70%; }
+
+    .card-body {
+      padding: 24px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .c-fw .card-body { justify-content: center; padding: 40px 48px; }
+
+    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 2px; }
+
+    .tag {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: #F2F2F2;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 1.8vw, 24px);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .c-fw .card-title { font-size: clamp(22px, 2.2vw, 32px); }
+
+    .card-desc {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 440px;
+    }
+
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-top: 4px;
+      transition: gap 0.25s;
+    }
+
+    .card:hover .card-cta { gap: 10px; }
+
+    /* ─── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 1024px) {
+      :root { --section-v: 96px; }
+      nav, .works { padding-left: 36px; padding-right: 36px; }
+      .c-xl, .c-lg { grid-column: span 12; }
+      .c-md { grid-column: span 6; }
+      .c-fw { flex-direction: column; }
+      .c-fw .card-img { flex: none; min-height: 220px; }
+      .menu-overlay { padding: 80px 48px 60px; }
+      .menu-footer { left: 48px; right: 48px; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --section-v: 80px; --gap: 12px; }
+      nav { padding: 0 24px; }
+      .works { padding-left: 24px; padding-right: 24px; }
+      .c-xl, .c-lg, .c-md, .c-fw { grid-column: span 12; }
+      .c-xl, .c-lg { min-height: 380px; }
+      .c-md { min-height: 300px; }
+      .c-fw { flex-direction: column; min-height: auto; }
+      .c-fw .card-img { min-height: 200px; font-size: 48px; }
+      .c-fw .card-body { padding: 28px 24px 32px; }
+      .menu-overlay { padding: 100px 28px 80px; }
+      .menu-footer { left: 28px; right: 28px; flex-direction: column; gap: 20px; align-items: flex-start; }
+      .menu-links a { font-size: clamp(36px, 11vw, 52px); }
+    }
+
+    @media (max-width: 480px) {
+      nav { padding: 0 20px; }
+      .works { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- MENU OVERLAY -->
+  <div class="menu-overlay" id="menuOverlay" role="dialog" aria-modal="true" aria-label="Site navigation">
+    <ul class="menu-links">
+      <li><a href="#works"><span class="num">01</span>Work</a></li>
+      <li><a href="#about"><span class="num">02</span>About</a></li>
+      <li><a href="#process"><span class="num">03</span>Approach</a></li>
+      <li><a href="#contact"><span class="num">04</span>Contact</a></li>
+    </ul>
+    <div class="menu-footer">
+      <div>
+        <p class="menu-contact-label">Get in touch</p>
+        <a href="mailto:hello@aj.design" class="menu-contact-link">hello@aj.design</a>
+      </div>
+      <div>
+        <p class="menu-contact-label">Connect</p>
+        <a href="#" class="menu-contact-link">LinkedIn →</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Introduction">
+      <div class="hero-inner">
+        <h1>
+          <span class="line">Turning <span class="word-carousel" id="wordCarousel" aria-live="polite"><span class="word-track" id="wordTrack"><span>complexity</span><span>ambiguity</span><span>friction</span><span>uncertainty</span></span></span></span>
+          <span class="line">into business clarity.</span>
+        </h1>
+        <p class="hero-sub">From taking ideas from 0&nbsp;→&nbsp;1 to evolving enterprise products, I bring together product strategy, systems thinking, and thoughtful design to help teams build products that people trust and businesses value.</p>
+        <div class="hero-ctas">
+          <a href="#works" class="btn-primary">
+            View Selected Work
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+          <a href="#contact" class="btn-secondary">
+            <span class="material-symbols-outlined">chat_bubble_outline</span>
+            Start a conversation
+          </a>
+        </div>
+      </div>
+
+      <!-- MARQUEE -->
+      <div class="marquee-wrap" aria-hidden="true">
+        <div class="marquee-track">
+          <!-- Group 1 -->
+          <div class="marquee-group">
+            <span class="marquee-item">Volkswagen</span>
+            <span class="marquee-sep">·</span>
+            <span class="marquee-item">Harley-Davidson</span>
+            <span class="marquee-sep">·</span>
+            <span class="marquee-item">TransUnion CIBIL</span>
+            <span class="marquee-sep">·</span>
+            <span class="marquee-item">TATA Trusts</span>
+            <span class="marquee-sep">·</span>
+            <span class="marquee-item">Vaidya AI</span>
+            <span class="marquee-sep">·</span>
+            <span class="marquee-item">Kubix</span>
+            <span class="marquee-sep">·</span>
+            <span class="marquee-item">Planera</span>
+            <span class="marquee-sep">·</span>
+            <span class="marquee-item">NetBrahma</span>
+            <span class="marquee-sep">·</span>
+          </div>
+          <!-- Group 2 — duplicate for seamless loop -->
+          <div class="marquee-group">
+            <span class="marquee-item">Volkswagen</span>
+            <span class="marquee-sep">·</span>
+            <span class="marquee-item">Harley-Davidson</span>
+            <span class="marquee-sep">·</span>
+            <span class="marquee-item">TransUnion CIBIL</span>
+            <span class="marquee-sep">·</span>
+            <span class="marquee-item">TATA Trusts</span>
+            <span class="marquee-sep">·</span>
+            <span class="marquee-item">Vaidya AI</span>
+            <span class="marquee-sep">·</span>
+            <span class="marquee-item">Kubix</span>
+            <span class="marquee-sep">·</span>
+            <span class="marquee-item">Planera</span>
+            <span class="marquee-sep">·</span>
+            <span class="marquee-item">NetBrahma</span>
+            <span class="marquee-sep">·</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTED WORKS -->
+    <section class="works" id="works" aria-label="Selected Work">
+      <div class="section-header">
+        <p class="section-eyebrow">Selected Work</p>
+        <h2 class="section-title">Strategy and craft,<br>applied at scale.</h2>
+        <p class="section-desc">A curated set of engagements across enterprise, consumer, and emerging tech — where design leadership shaped product direction and measurable outcomes.</p>
+      </div>
+
+      <div class="bento" role="list">
+
+        <a href="./TransUnion CIBIL/" class="card c-xl" role="listitem">
+          <div class="card-img bg-1">TC</div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag">Fintech</span>
+              <span class="tag">Enterprise</span>
+              <span class="tag">Product Strategy</span>
+            </div>
+            <h3 class="card-title">TransUnion CIBIL</h3>
+            <p class="card-desc">Redesigning credit intelligence for 1.3 billion Indians — turning data complexity into financial clarity.</p>
+            <span class="card-cta">View Case Study →</span>
+          </div>
+        </a>
+
+        <a href="./Volkswagen/" class="card c-lg" role="listitem">
+          <div class="card-img bg-2">VW</div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag">Automotive</span>
+              <span class="tag">Design System</span>
+            </div>
+            <h3 class="card-title">Volkswagen</h3>
+            <p class="card-desc">A scalable design system for one of the world's most recognised automotive brands.</p>
+            <span class="card-cta">View Case Study →</span>
+          </div>
+        </a>
+
+        <a href="./Harley Davidson/" class="card c-md" role="listitem">
+          <div class="card-img bg-3">HD</div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag">Consumer</span>
+              <span class="tag">Brand</span>
+            </div>
+            <h3 class="card-title">Harley-Davidson</h3>
+            <p class="card-desc">Bridging an iconic brand's legacy with a modern digital experience.</p>
+            <span class="card-cta">View →</span>
+          </div>
+        </a>
+
+        <a href="./TATA Trusts/" class="card c-md" role="listitem">
+          <div class="card-img bg-4">TT</div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag">Social Impact</span>
+              <span class="tag">Nonprofit</span>
+            </div>
+            <h3 class="card-title">TATA Trusts</h3>
+            <p class="card-desc">Design leadership in service of social impact at national scale.</p>
+            <span class="card-cta">View →</span>
+          </div>
+        </a>
+
+        <a href="./Vaidya AI/" class="card c-md" role="listitem">
+          <div class="card-img bg-5">AI</div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag">Healthcare AI</span>
+              <span class="tag">0 → 1</span>
+            </div>
+            <h3 class="card-title">Vaidya AI</h3>
+            <p class="card-desc">Designing clinical AI at the frontier of healthcare in India.</p>
+            <span class="card-cta">View →</span>
+          </div>
+        </a>
+
+        <a href="./Kubix/" class="card c-md" role="listitem">
+          <div class="card-img bg-6">Kx</div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag">Startup</span>
+              <span class="tag">Product Design</span>
+            </div>
+            <h3 class="card-title">Kubix</h3>
+            <p class="card-desc">Early-stage product strategy and design from the ground up.</p>
+            <span class="card-cta">View →</span>
+          </div>
+        </a>
+
+        <a href="./Planera/" class="card c-md" role="listitem">
+          <div class="card-img bg-7">Pl</div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag">SaaS</span>
+              <span class="tag">0 → 1</span>
+            </div>
+            <h3 class="card-title">Planera</h3>
+            <p class="card-desc">Building a planning product from first principles to launch.</p>
+            <span class="card-cta">View →</span>
+          </div>
+        </a>
+
+        <a href="./NetBrahma Recruitment CoPilot/" class="card c-fw" role="listitem">
+          <div class="card-img bg-8">NB</div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="tag">AI Product</span>
+              <span class="tag">Built with Claude</span>
+              <span class="tag">End-to-end</span>
+            </div>
+            <h3 class="card-title">NetBrahma Recruitment CoPilot</h3>
+            <p class="card-desc">A fully AI-built recruitment intelligence tool — designed, engineered, and shipped using Claude. From strategy and system design to production deployment.</p>
+            <span class="card-cta">View Case Study →</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // ── Menu ──────────────────────────────────────────
+    const btn = document.getElementById('menuBtn');
+    const overlay = document.getElementById('menuOverlay');
+    let isOpen = false;
+
+    function toggleMenu(open) {
+      isOpen = open;
+      btn.classList.toggle('open', isOpen);
+      overlay.classList.toggle('open', isOpen);
+      btn.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    btn.addEventListener('click', () => toggleMenu(!isOpen));
+    overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) toggleMenu(false); });
+
+    // ── Word carousel (crossfade) ──────────────────────
+    const carousel = document.getElementById('wordCarousel');
+    const track    = document.getElementById('wordTrack');
+    const items    = Array.from(track.children);
+    let current = 0;
+
+    function initCarousel() {
+      items[0].classList.add('active');
+      setInterval(advance, 2000);
+    }
+
+    function advance() {
+      const prev = items[current];
+      current = (current + 1) % items.length;
+      const next = items[current];
+
+      prev.classList.remove('active');
+      prev.classList.add('leaving');
+      next.classList.add('active');
+
+      setTimeout(() => {
+        prev.style.transition = 'none';
+        prev.classList.remove('leaving');
+        prev.offsetHeight; // force reflow
+        prev.style.transition = '';
+      }, 620);
+    }
+
+    initCarousel();
+
+  </script>
+
+</body>
+</html>
