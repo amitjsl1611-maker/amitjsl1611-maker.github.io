@@ -492,24 +492,31 @@
     /* ─── BENTO GRID ──────────────────────────────── */
     .bento {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(12, 1fr);
       gap: var(--gap);
     }
 
-    /* Card scroll reveal — hidden before JS fires */
+    /* Span classes */
+    .c-xl   { grid-column: span 7;  min-height: 500px; }
+    .c-lg   { grid-column: span 5;  min-height: 500px; }
+    .c-md   { grid-column: span 4;  min-height: 380px; }
+    .c-half { grid-column: span 6;  min-height: 380px; }
+    .c-fw   { grid-column: span 12; min-height: 300px; }
+
+    /* ── Base card ── */
     .card {
+      background: var(--white);
       border-radius: 18px;
       overflow: hidden;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
-      height: 500px;
+      position: relative;
       opacity: 0;
       transform: translateY(28px);
     }
 
-    /* Once revealed: transition enabled, visible, hover works */
     .card.revealed {
       opacity: 1;
       transform: translateY(0);
@@ -519,8 +526,8 @@
     }
 
     .card.revealed:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 28px 72px rgba(0,0,0,0.12);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.11);
     }
 
     .card.revealed:active {
@@ -533,7 +540,7 @@
       .card.revealed { transition: box-shadow 0.3s ease; }
     }
 
-    /* Card image — real photos */
+    /* ── Inset style (image top, white body below) ── */
     .card-img {
       flex: 0 0 58%;
       position: relative;
@@ -544,8 +551,7 @@
     .card-img img {
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       display: block;
       transition: transform 0.65s cubic-bezier(0.23, 1, 0.32, 1);
@@ -555,50 +561,92 @@
 
     .card-body {
       flex: 1;
-      padding: 20px 24px 24px;
+      background: var(--white);
+      padding: 22px 26px 26px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 9px;
     }
 
-    /* Pastel gradients per card */
-    .grad-peach    .card-body { background: linear-gradient(160deg, #FDEEE8 0%, #FFF8F5 100%); }
-    .grad-sky      .card-body { background: linear-gradient(160deg, #E8EFFE 0%, #F5F8FF 100%); }
-    .grad-amber    .card-body { background: linear-gradient(160deg, #FDF4E3 0%, #FFFCF5 100%); }
-    .grad-sage     .card-body { background: linear-gradient(160deg, #E4F5EC 0%, #F5FFF8 100%); }
-    .grad-lavender .card-body { background: linear-gradient(160deg, #EEEAFD 0%, #F9F7FF 100%); }
-    .grad-mint     .card-body { background: linear-gradient(160deg, #E4F7F4 0%, #F5FFFD 100%); }
-    .grad-rose     .card-body { background: linear-gradient(160deg, #FDE8F0 0%, #FFF5F9 100%); }
-    .grad-slate    .card-body { background: linear-gradient(160deg, #E8EEF8 0%, #F5F8FF 100%); }
+    /* ── Full-bleed style (image covers card, text overlaid) ── */
+    .card.full .card-img {
+      position: absolute;
+      inset: 0;
+      flex: none;
+      height: 100%;
+    }
 
+    .card.full .card-body {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top,
+        rgba(0,0,0,0.85) 0%,
+        rgba(0,0,0,0.55) 45%,
+        transparent 100%);
+      padding: 28px 28px 32px;
+      gap: 10px;
+    }
+
+    .card.full .tag {
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.8);
+    }
+
+    .card.full .card-title { color: #fff; }
+    .card.full .card-desc  { color: rgba(255,255,255,0.68); }
+    .card.full .card-cta   { color: rgba(255,255,255,0.9); }
+
+    /* ── Full-width row card (NetBrahma) ── */
+    .c-fw {
+      flex-direction: row;
+    }
+
+    .c-fw .card-img {
+      flex: 0 0 45%;
+      height: auto;
+      min-height: 100%;
+    }
+
+    .c-fw .card-body {
+      justify-content: center;
+      padding: 40px 48px;
+    }
+
+    /* ── Tags, title, desc, cta ── */
     .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 2px; }
 
     .tag {
       font-family: var(--font-body);
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--text-muted);
-      background: rgba(13,13,13,0.08);
+      background: rgba(13,13,13,0.07);
       padding: 4px 10px;
       border-radius: 100px;
     }
 
     .card-title {
       font-family: var(--font-display);
-      font-size: clamp(16px, 1.4vw, 20px);
-      font-weight: 600;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
+      font-size: clamp(17px, 1.6vw, 22px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
       color: var(--text);
     }
 
+    .c-xl .card-title,
+    .c-lg .card-title { font-size: clamp(20px, 1.9vw, 28px); }
+
+    .c-fw .card-title { font-size: clamp(22px, 2.2vw, 32px); }
+
     .card-desc {
       font-family: var(--font-body);
-      font-size: 12.5px;
+      font-size: 13px;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.65;
+      max-width: 420px;
     }
 
     .card-cta {
@@ -623,7 +671,12 @@
       nav   { padding: 0 36px; }
       .hero { padding-left: 36px; padding-right: 36px; }
       .works { padding-left: 36px; padding-right: 36px; }
-      .bento { grid-template-columns: repeat(2, 1fr); }
+      .c-xl, .c-lg { grid-column: span 12; }
+      .c-md { grid-column: span 6; }
+      .c-half { grid-column: span 6; }
+      .c-fw { flex-direction: column; min-height: auto; }
+      .c-fw .card-img { flex: 0 0 260px; min-height: 260px; }
+      .c-fw .card-body { padding: 28px 32px 36px; }
       .menu-overlay { padding: 80px 48px 60px; }
       .menu-footer { left: 48px; right: 48px; }
     }
@@ -633,8 +686,12 @@
       nav   { padding: 0 24px; }
       .hero { padding: calc(var(--nav-h) + 20px) 24px 0; }
       .works { padding-left: 24px; padding-right: 24px; }
-      .bento { grid-template-columns: 1fr; }
-      .card { height: 460px; }
+      .c-xl, .c-lg, .c-md, .c-half, .c-fw { grid-column: span 12; }
+      .c-xl, .c-lg { min-height: 400px; }
+      .c-md, .c-half { min-height: 340px; }
+      .c-fw { flex-direction: column; min-height: auto; }
+      .c-fw .card-img { flex: 0 0 220px; min-height: 220px; }
+      .c-fw .card-body { padding: 24px 24px 32px; }
       .hero-inner { padding-bottom: 80px; }
       .menu-overlay { padding: 100px 28px 80px; }
       .menu-footer { left: 28px; right: 28px; flex-direction: column; gap: 20px; align-items: flex-start; }
@@ -754,7 +811,8 @@
 
       <div class="bento" role="list">
 
-        <a href="./TransUnion CIBIL/" class="card grad-peach" role="listitem">
+        <!-- TransUnion CIBIL — large, full bleed -->
+        <a href="./TransUnion CIBIL/" class="card c-xl full" role="listitem">
           <div class="card-img">
             <img src="https://picsum.photos/seed/cibil-fintech/900/600" alt="" loading="lazy">
           </div>
@@ -770,7 +828,8 @@
           </div>
         </a>
 
-        <a href="./Volkswagen/" class="card grad-sky" role="listitem">
+        <!-- Volkswagen — medium, inset -->
+        <a href="./Volkswagen/" class="card c-lg" role="listitem">
           <div class="card-img">
             <img src="https://picsum.photos/seed/vw-automotive/700/600" alt="" loading="lazy">
           </div>
@@ -785,7 +844,8 @@
           </div>
         </a>
 
-        <a href="./Harley Davidson/" class="card grad-amber" role="listitem">
+        <!-- Harley-Davidson — medium, full bleed -->
+        <a href="./Harley Davidson/" class="card c-md full" role="listitem">
           <div class="card-img">
             <img src="https://picsum.photos/seed/harley-davidson/600/500" alt="" loading="lazy">
           </div>
@@ -800,7 +860,8 @@
           </div>
         </a>
 
-        <a href="./TATA Trusts/" class="card grad-sage" role="listitem">
+        <!-- TATA Trusts — medium, inset -->
+        <a href="./TATA Trusts/" class="card c-md" role="listitem">
           <div class="card-img">
             <img src="https://picsum.photos/seed/tata-social/600/500" alt="" loading="lazy">
           </div>
@@ -815,7 +876,8 @@
           </div>
         </a>
 
-        <a href="./Vaidya AI/" class="card grad-lavender" role="listitem">
+        <!-- Vaidya AI — medium, full bleed -->
+        <a href="./Vaidya AI/" class="card c-md full" role="listitem">
           <div class="card-img">
             <img src="https://picsum.photos/seed/vaidya-health/600/500" alt="" loading="lazy">
           </div>
@@ -830,7 +892,8 @@
           </div>
         </a>
 
-        <a href="./Kubix/" class="card grad-mint" role="listitem">
+        <!-- Kubix — half, inset -->
+        <a href="./Kubix/" class="card c-half" role="listitem">
           <div class="card-img">
             <img src="https://picsum.photos/seed/kubix-startup/700/500" alt="" loading="lazy">
           </div>
@@ -845,7 +908,8 @@
           </div>
         </a>
 
-        <a href="./Planera/" class="card grad-rose" role="listitem">
+        <!-- Planera — half, full bleed -->
+        <a href="./Planera/" class="card c-half full" role="listitem">
           <div class="card-img">
             <img src="https://picsum.photos/seed/planera-saas/700/500" alt="" loading="lazy">
           </div>
@@ -860,7 +924,8 @@
           </div>
         </a>
 
-        <a href="./NetBrahma Recruitment CoPilot/" class="card grad-slate" role="listitem">
+        <!-- NetBrahma — full width, inset row -->
+        <a href="./NetBrahma Recruitment CoPilot/" class="card c-fw" role="listitem">
           <div class="card-img">
             <img src="https://picsum.photos/seed/netbrahma-ai/1000/600" alt="" loading="lazy">
           </div>
