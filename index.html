@@ -344,30 +344,19 @@
     .marquee-item {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      font-family: var(--font-display);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
       white-space: nowrap;
-      padding: 0 32px;
-      transition: color 0.2s, opacity 0.2s;
+      padding: 0 36px;
     }
 
-    .marquee-item:hover { color: var(--text); }
-
-    .marquee-item svg {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-      opacity: 0.45;
-      fill: currentColor;
-      transition: opacity 0.2s;
+    .marquee-item img {
+      height: 22px;
+      width: auto;
+      display: block;
+      filter: grayscale(1) opacity(0.45);
+      transition: filter 0.25s;
     }
 
-    .marquee-item:hover svg { opacity: 0.7; }
+    .marquee-item:hover img { filter: grayscale(1) opacity(0.75); }
 
     .marquee-sep {
       color: var(--orange);
@@ -651,96 +640,40 @@
         <div class="marquee-track">
           <!-- Group 1 -->
           <div class="marquee-group">
-            <span class="marquee-item">
-              <!-- Volkswagen roundel -->
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18.5C7.31 20.5 3.5 16.69 3.5 12S7.31 3.5 12 3.5 20.5 7.31 20.5 12 16.69 20.5 12 20.5zM9.1 7.2l1.75 4.2L12 8.9l1.15 2.5L14.9 7.2h1.6l-2.6 6.1-1.65-3.6-1.65 3.6L7.5 7.2H9.1zm5.55 7.3L12 17.3l-2.65-2.8 1.0-2.4 1.65 3.5 1.65-3.5 1.0 2.4z"/></svg>
-              Volkswagen
-            </span>
+            <span class="marquee-item"><img src="Logos/VW.png" alt="Volkswagen"></span>
             <span class="marquee-sep">·</span>
-            <span class="marquee-item">
-              <!-- Harley-Davidson shield -->
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 5v6c0 4.42 3.44 8.57 8 9.93C16.56 19.57 20 15.42 20 11V5l-8-3zm0 2.18l6 2.25V11c0 3.5-2.72 6.79-6 8.08C8.72 17.79 6 14.5 6 11V6.43l6-2.25zM9 9v6h1.5v-2.25H12V15h1.5V9H12v2.25h-1.5V9H9z"/></svg>
-              Harley-Davidson
-            </span>
+            <span class="marquee-item"><img src="Logos/HD.png" alt="Harley-Davidson"></span>
             <span class="marquee-sep">·</span>
-            <span class="marquee-item">
-              <!-- TransUnion CIBIL — abstract TU -->
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 6h14v2H5V6zm4 3h6v7a3 3 0 01-6 0V9zm1.5 1.5v5.5a1.5 1.5 0 003 0V10.5h-3z"/></svg>
-              TransUnion CIBIL
-            </span>
+            <span class="marquee-item"><img src="Logos/TU.png" alt="TransUnion CIBIL"></span>
             <span class="marquee-sep">·</span>
-            <span class="marquee-item">
-              <!-- TATA T mark -->
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16v2.5H4V6zm5.75 0h4.5v13h-4.5V6z"/></svg>
-              TATA Trusts
-            </span>
+            <span class="marquee-item"><img src="Logos/tata.png" alt="TATA Trusts"></span>
             <span class="marquee-sep">·</span>
-            <span class="marquee-item">
-              <!-- Vaidya AI — medical cross -->
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 2a8 8 0 110 16A8 8 0 0112 4zm-1 4v3H8v2h3v3h2v-3h3v-2h-3V8h-2z"/></svg>
-              Vaidya AI
-            </span>
+            <span class="marquee-item"><img src="Logos/kubix.png" alt="Kubix"></span>
             <span class="marquee-sep">·</span>
-            <span class="marquee-item">
-              <!-- Kubix — cube mark -->
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L3 7.5v9L12 21l9-4.5v-9L12 3zm0 2.24l6.5 3.26-6.5 3.26L5.5 8.5 12 5.24zM4.5 10.07l7 3.5V19.5l-7-3.5v-5.93zm9 9.43v-5.93l7-3.5v5.93l-7 3.5z"/></svg>
-              Kubix
-            </span>
+            <span class="marquee-item"><img src="Logos/planera.png" alt="Planera"></span>
             <span class="marquee-sep">·</span>
-            <span class="marquee-item">
-              <!-- Planera — compass/plan mark -->
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 2c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8zm4.24 3.76L10.5 10.5 7.76 17.24l6.74-2.74 2.74-6.74zM12 10.9a1.1 1.1 0 110 2.2 1.1 1.1 0 010-2.2z"/></svg>
-              Planera
-            </span>
+            <span class="marquee-item"><img src="Logos/NB.png" alt="NetBrahma"></span>
             <span class="marquee-sep">·</span>
-            <span class="marquee-item">
-              <!-- NetBrahma — NB node mark -->
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a3.5 3.5 0 00-3.5 3.5c0 .9.34 1.71.9 2.32L5.82 11.5A3.48 3.48 0 004 11a3.5 3.5 0 000 7 3.5 3.5 0 003.32-4.6l3.5-3.5c.38.12.78.1 1.18.1.4 0 .8-.02 1.18-.1l3.5 3.5A3.5 3.5 0 0020 18a3.5 3.5 0 000-7 3.48 3.48 0 00-1.82.5l-3.58-3.68c.56-.61.9-1.42.9-2.32A3.5 3.5 0 0012 2z"/></svg>
-              NetBrahma
-            </span>
+            <span class="marquee-item"><img src="Logos/schumacher homes.png" alt="Schumacher Homes"></span>
             <span class="marquee-sep">·</span>
           </div>
           <!-- Group 2 — duplicate for seamless loop -->
           <div class="marquee-group">
-            <span class="marquee-item">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18.5C7.31 20.5 3.5 16.69 3.5 12S7.31 3.5 12 3.5 20.5 7.31 20.5 12 16.69 20.5 12 20.5zM9.1 7.2l1.75 4.2L12 8.9l1.15 2.5L14.9 7.2h1.6l-2.6 6.1-1.65-3.6-1.65 3.6L7.5 7.2H9.1zm5.55 7.3L12 17.3l-2.65-2.8 1.0-2.4 1.65 3.5 1.65-3.5 1.0 2.4z"/></svg>
-              Volkswagen
-            </span>
+            <span class="marquee-item"><img src="Logos/VW.png" alt="Volkswagen"></span>
             <span class="marquee-sep">·</span>
-            <span class="marquee-item">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 5v6c0 4.42 3.44 8.57 8 9.93C16.56 19.57 20 15.42 20 11V5l-8-3zm0 2.18l6 2.25V11c0 3.5-2.72 6.79-6 8.08C8.72 17.79 6 14.5 6 11V6.43l6-2.25zM9 9v6h1.5v-2.25H12V15h1.5V9H12v2.25h-1.5V9H9z"/></svg>
-              Harley-Davidson
-            </span>
+            <span class="marquee-item"><img src="Logos/HD.png" alt="Harley-Davidson"></span>
             <span class="marquee-sep">·</span>
-            <span class="marquee-item">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 6h14v2H5V6zm4 3h6v7a3 3 0 01-6 0V9zm1.5 1.5v5.5a1.5 1.5 0 003 0V10.5h-3z"/></svg>
-              TransUnion CIBIL
-            </span>
+            <span class="marquee-item"><img src="Logos/TU.png" alt="TransUnion CIBIL"></span>
             <span class="marquee-sep">·</span>
-            <span class="marquee-item">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16v2.5H4V6zm5.75 0h4.5v13h-4.5V6z"/></svg>
-              TATA Trusts
-            </span>
+            <span class="marquee-item"><img src="Logos/tata.png" alt="TATA Trusts"></span>
             <span class="marquee-sep">·</span>
-            <span class="marquee-item">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 2a8 8 0 110 16A8 8 0 0112 4zm-1 4v3H8v2h3v3h2v-3h3v-2h-3V8h-2z"/></svg>
-              Vaidya AI
-            </span>
+            <span class="marquee-item"><img src="Logos/kubix.png" alt="Kubix"></span>
             <span class="marquee-sep">·</span>
-            <span class="marquee-item">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L3 7.5v9L12 21l9-4.5v-9L12 3zm0 2.24l6.5 3.26-6.5 3.26L5.5 8.5 12 5.24zM4.5 10.07l7 3.5V19.5l-7-3.5v-5.93zm9 9.43v-5.93l7-3.5v5.93l-7 3.5z"/></svg>
-              Kubix
-            </span>
+            <span class="marquee-item"><img src="Logos/planera.png" alt="Planera"></span>
             <span class="marquee-sep">·</span>
-            <span class="marquee-item">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 2c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8zm4.24 3.76L10.5 10.5 7.76 17.24l6.74-2.74 2.74-6.74zM12 10.9a1.1 1.1 0 110 2.2 1.1 1.1 0 010-2.2z"/></svg>
-              Planera
-            </span>
+            <span class="marquee-item"><img src="Logos/NB.png" alt="NetBrahma"></span>
             <span class="marquee-sep">·</span>
-            <span class="marquee-item">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a3.5 3.5 0 00-3.5 3.5c0 .9.34 1.71.9 2.32L5.82 11.5A3.48 3.48 0 004 11a3.5 3.5 0 000 7 3.5 3.5 0 003.32-4.6l3.5-3.5c.38.12.78.1 1.18.1.4 0 .8-.02 1.18-.1l3.5 3.5A3.5 3.5 0 0020 18a3.5 3.5 0 000-7 3.48 3.48 0 00-1.82.5l-3.58-3.68c.56-.61.9-1.42.9-2.32A3.5 3.5 0 0012 2z"/></svg>
-              NetBrahma
-            </span>
+            <span class="marquee-item"><img src="Logos/schumacher homes.png" alt="Schumacher Homes"></span>
             <span class="marquee-sep">·</span>
           </div>
         </div>
