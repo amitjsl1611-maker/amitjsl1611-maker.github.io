@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
 
   <style>
@@ -27,8 +27,8 @@
       --white:       #FFFFFF;
       --border:      rgba(13,13,13,0.1);
 
-      --font-display: 'Fustat', sans-serif;
-      --font-body:    'Fustat', sans-serif;
+      --font-display: 'Rethink Sans', sans-serif;
+      --font-body:    'Manrope', sans-serif;
 
       --nav-h:     72px;
       --max-w:     1200px;
@@ -417,6 +417,78 @@
       max-width: 460px;
     }
 
+    /* ─── HOW I WORK ─────────────────────────────── */
+    .approach {
+      padding: var(--section-v) 56px;
+      max-width: calc(var(--max-w) + 112px);
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 72px;
+    }
+
+    .approach-card {
+      padding: 40px 36px 44px;
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    .approach-card:first-child { border-radius: 14px 0 0 14px; }
+    .approach-card:last-child  { border-radius: 0 14px 14px 0; }
+
+    .approach-num {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      opacity: 0.7;
+    }
+
+    .approach-title {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 1.8vw, 26px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--text);
+    }
+
+    .approach-desc {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+
+    @media (max-width: 1024px) {
+      .approach { padding-left: 36px; padding-right: 36px; }
+      .approach-grid { grid-template-columns: repeat(2, 1fr); }
+      .approach-card:first-child  { border-radius: 14px 0 0 0; }
+      .approach-card:last-child   { border-radius: 0 0 14px 0; }
+      .approach-card:nth-child(2) { border-radius: 0 14px 0 0; }
+      .approach-card:nth-child(3) { border-radius: 0 0 0 14px; }
+    }
+
+    @media (max-width: 768px) {
+      .approach { padding-left: 24px; padding-right: 24px; }
+      .approach-grid { grid-template-columns: 1fr; gap: 2px; }
+      .approach-card:first-child  { border-radius: 14px 14px 0 0; }
+      .approach-card:nth-child(2) { border-radius: 0; }
+      .approach-card:nth-child(3) { border-radius: 0; }
+      .approach-card:last-child   { border-radius: 0 0 14px 14px; }
+    }
+
     /* ─── BENTO GRID ──────────────────────────────── */
     .bento {
       display: grid;
@@ -803,6 +875,43 @@
             <span class="card-cta">View Case Study &rarr;</span>
           </div>
         </a>
+
+      </div>
+    </section>
+
+    <!-- HOW I WORK -->
+    <section class="approach" id="process" aria-label="How I Work">
+      <div class="section-header">
+        <p class="section-eyebrow">How I Work</p>
+        <h2 class="section-title">Not a process.<br>A way of thinking.</h2>
+        <p class="section-desc">Four principles that shape every engagement — from a first stakeholder conversation to a shipped product.</p>
+      </div>
+
+      <div class="approach-grid">
+
+        <div class="approach-card">
+          <span class="approach-num">01</span>
+          <h3 class="approach-title">Earn the right to design</h3>
+          <p class="approach-desc">I spend more time understanding a problem than solving it. That means business constraints, market forces, domain knowledge, and the gap between what users say and what they actually do — before a single frame is made.</p>
+        </div>
+
+        <div class="approach-card">
+          <span class="approach-num">02</span>
+          <h3 class="approach-title">Fix the frame, not the form</h3>
+          <p class="approach-desc">Most product failures are framing failures. I work with stakeholders to distinguish root causes from symptoms, establish shared language, and redirect effort toward problems worth solving — even when that means questioning the brief.</p>
+        </div>
+
+        <div class="approach-card">
+          <span class="approach-num">03</span>
+          <h3 class="approach-title">Design for change</h3>
+          <p class="approach-desc">Products that scale are built on decisions, not deliverables. I think in systems — interaction models, information architecture, component logic — so that what gets built today doesn't become tomorrow's technical debt.</p>
+        </div>
+
+        <div class="approach-card">
+          <span class="approach-num">04</span>
+          <h3 class="approach-title">Close the loop</h3>
+          <p class="approach-desc">Shipping is not the end. I stay accountable to outcomes — testing assumptions, reading usage data, and refining until the product works in the real world, not just in a prototype.</p>
+        </div>
 
       </div>
     </section>
